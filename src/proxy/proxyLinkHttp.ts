@@ -35,9 +35,9 @@ export function newProxyLinkHttp<ENV>({intercept,reqTranslator,resTranslator}:Ne
             }
         }, req,env);
         
-//        if (reqConfig.url.hostname == new URL(req.url).hostname) {
-//            return new Response("Same hostname", { status: 404 });
-//        }
+        if (reqConfig.url.hostname == new URL(req.url).hostname) {
+            return new Response("Same hostname", { status: 404 });
+        }
         const res = await fetch(reqConfig.url, reqConfig.init);
         const resConfig  = await resTranslator({
             body: res.body as any,
